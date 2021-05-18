@@ -4,8 +4,10 @@ set -e
 
 # change user and group id as specified in env and based on os
 if [[ $(cat /etc/os-release | awk 'NR==1') == 'NAME="Alpine Linux"' ]]; then 
-
+  usermod -u ${PUID} teamspeak
 elif [[ $(cat /etc/os-release | awk 'NR==1') == 'NAME="Debian"' ]]; then
+
+elif [[ unraid ]]; then
 
 else
   echo "Invalid or unknown OS"
