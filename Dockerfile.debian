@@ -1,7 +1,7 @@
 FROM debian:buster
-MAINTAINER Matt Bentley <mbentley@mbentley.net>
+LABEL maintainer="Matt Bentley <mbentley@mbentley.net>"
 
-ENV TS_DIRECTORY=/opt/teamspeak
+ENV TS_DIRECTORY=/opt/teamspeak PUID=503 GUID=503
 
 # install the latest teamspeak
 RUN apt-get update &&\
@@ -23,8 +23,8 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # create user, group, and set permissions
-RUN groupadd -g 503 teamspeak &&\
-  useradd -u 503 -g 503 -d ${TS_DIRECTORY} teamspeak &&\
+RUN groupadd -g ${GUID} teamspeak &&\
+  useradd -u ${PUID} -g ${GUID} -d ${TS_DIRECTORY} teamspeak &&\
   mkdir /data &&\
   chown -R teamspeak:teamspeak ${TS_DIRECTORY} /data
 

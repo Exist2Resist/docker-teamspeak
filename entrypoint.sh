@@ -2,6 +2,15 @@
 
 set -e
 
+# change user and group id as specified in env and based on os
+if [[ $(cat /etc/os-release | awk 'NR==1') == 'NAME="Alpine Linux"' ]]; then 
+
+elif [[ $(cat /etc/os-release | awk 'NR==1') == 'NAME="Debian"' ]]; then
+
+else
+  echo "Invalid or unknown OS"
+fi
+
 # create directory for teamspeak files
 test -d /data/files || mkdir -p /data/files && chown teamspeak:teamspeak /data/files
 
